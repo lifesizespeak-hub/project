@@ -4,7 +4,30 @@
 
 ## プロジェクト概要
 
-(プロジェクトの内容が決まったらここに記載してください)
+React製のタスクボードアプリ。テキスト入力でのタスク追加、チェックボックスによる完了・未完了の切り替え、削除、完了済みタスクのグレー表示を提供する。タスクは `localStorage` に保存され、リロードしても保持される。
+
+## デプロイ先
+
+https://lifesizespeak-hub.github.io/project/
+
+`main` ブランチへの push をトリガーに `.github/workflows/deploy.yml` が自動でビルド・デプロイする(GitHub Pages の Source は Settings > Pages で GitHub Actions を選択済み)。
+
+## 技術スタック
+
+- React 19 + TypeScript
+- Vite 8 (ビルド・開発サーバー)
+- oxlint (Lint)
+- 状態管理: React の `useState` / `useEffect` のみ(外部ライブラリ不使用)
+- 永続化: `localStorage`
+- ホスティング: GitHub Pages (GitHub Actions によるデプロイ)
+
+## コンポーネントの命名規約
+
+- コンポーネントファイルは `PascalCase.tsx`、`src/components/` 配下に配置する(例: `TaskForm.tsx`, `TaskItem.tsx`, `TaskList.tsx`)。
+- 1ファイル1コンポーネントとし、ファイル名とコンポーネント名(デフォルトエクスポート)を一致させる。
+- props の型は `<コンポーネント名>Props` という名前のインターフェースで定義する(例: `TaskFormProps`)。
+- 型定義は `src/types.ts` に集約する(例: `Task`)。
+- CSS クラス名はコンポーネント単位のプレフィックスを付けた kebab-case とする(例: `task-item`, `task-item--completed` のように BEM 風の modifier を用いる)。
 
 ## Git 運用ルール
 
@@ -18,8 +41,13 @@
 
 ## セットアップ
 
-(このリポジトリはまだ Git 管理下にありません。`git init` および GitHub リモートリポジトリの設定が必要です)
+```
+npm install
+```
 
 ## 開発コマンド
 
-(ビルド・テスト・実行コマンドが決まったらここに記載してください)
+- `npm run dev` — 開発サーバー起動
+- `npm run build` — 型チェック + 本番ビルド
+- `npm run lint` — oxlint によるリント
+- `npm run preview` — ビルド成果物のプレビュー
